@@ -28,7 +28,7 @@ var renderCloud = function (ctx, color, x, y, width, height) {
   ctx.strokeRect(x, y, width, height);
   ctx.fillRect(x, y, width, height);
 };
-var drawTextTitle = function (ctx, color, font, string, x, y) {
+var drawText = function (ctx, color, font, string, x, y) {
   ctx.fillStyle = color;
   ctx.font = font;
   ctx.fillText(string, x, y);
@@ -45,8 +45,8 @@ var getMaxElement = function (arr) {
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, cloud.SHADOW.COLOR, cloud.X + cloud.SHADOW.GAP, cloud.Y + cloud.SHADOW.GAP, cloud.WIDTH, cloud.HEIGHT);
   renderCloud(ctx, cloud.COLOR, cloud.X, cloud.Y, cloud.WIDTH, cloud.HEIGHT);
-  drawTextTitle(ctx, textTitle.COLOR, textTitle.FONT, 'Ура вы победили!', textTitle.X, textTitle.Y);
-  drawTextTitle(ctx, textTitle.COLOR, textTitle.FONT, 'Список результатов:', textTitle.X, textTitle.Y + textTitle.GAP);
+  drawText(ctx, textTitle.COLOR, textTitle.FONT, 'Ура вы победили!', textTitle.X, textTitle.Y);
+  drawText(ctx, textTitle.COLOR, textTitle.FONT, 'Список результатов:', textTitle.X, textTitle.Y + textTitle.GAP);
   var drawHistogram = function () {
     var selectionColor = function (name) {
       if (name === 'Вы') {
@@ -58,7 +58,8 @@ window.renderStatistics = function (ctx, names, times) {
     var drawBar = function (time, name) {
       ctx.fillRect(textTitle.X + (histogram.WIDTH + histogram.SPACE) * j, cloud.HEIGHT - cloud.Y - textTitle.GAP - time * barHeight, histogram.WIDTH, time * barHeight);
       ctx.fillStyle = textTitle.COLOR;
-      ctx.fillText(name, textTitle.X + (histogram.WIDTH + histogram.SPACE) * j, (cloud.HEIGHT - cloud.Y));
+      drawText(ctx, textTitle.COLOR, textTitle.FONT, Math.ceil(time), textTitle.X + (histogram.WIDTH + histogram.SPACE) * j, cloud.HEIGHT - 4 * cloud.Y - time * barHeight);
+      drawText(ctx, textTitle.COLOR, textTitle.FONT, name, textTitle.X + (histogram.WIDTH + histogram.SPACE) * j, (cloud.HEIGHT - cloud.Y));
     };
     var graphHeight = 150;
     var barHeight = graphHeight / (getMaxElement(times));
