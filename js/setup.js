@@ -128,3 +128,4 @@ setupWizardEyes.addEventListener('click', function () {
 setupFireballWrap.addEventListener('click', function () {
   setupFireballWrap.style.background = getNextElement(WIZARD_OPTION.FIREBALL_COLORS, getRgbFrombackground(setupFireballWrap.style.background));
 });
+
